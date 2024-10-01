@@ -2,14 +2,17 @@ import { useState } from 'react'
 
 import './index.css'
 import Landing from './pages/Landing'
+import Login from './pages/Login'
+import Registration from './pages/Registration'
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
     <>
-      <Landing/>
-
+      {/* <Landing/> */}
+      {/* <Login/> */}
+      <Registration/>
     </>
   )
 }
