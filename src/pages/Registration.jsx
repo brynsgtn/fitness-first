@@ -12,7 +12,7 @@ export default function Registration() {
           <body class="h-full">
           ```
         */}
-        <div className=' h-screen overflow-hidden'>
+        <div className=' h-screen'>
             <div className="pt-10 pb-5">
             <img
                 alt="Your Company"
@@ -21,7 +21,7 @@ export default function Registration() {
                 />
             </div>
             <div className="flex flex-row justify-center items-center">
-            <div className='hidden lg:block order-2'>
+            <div className='hidden lg:block'>
                 <img src='src/assets/girl.png' className='running-girl'></img>
             </div>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 pt-3 pb-12 lg:px-0 lg:pt-0">

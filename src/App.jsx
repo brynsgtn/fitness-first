@@ -4,6 +4,8 @@ import './index.css'
 import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
+import Dashboard from './pages/Dashboard'
+import Navbar from './components/Navbar'
 
 function App() {
 
@@ -12,7 +14,9 @@ function App() {
     <>
       {/* <Landing/> */}
       {/* <Login/> */}
-      <Registration/>
+      {/* <Registration/> */}
+      <Navbar/>
+      <Dashboard/>
     </>
   )
 }
