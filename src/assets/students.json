@@ -1,0 +1,72 @@
+[
+    {
+      "name": "John Doe",
+      "totalSteps": 15000,
+      "avgHeartRate": 75,
+      "totalCalories": 500,
+      "section": "A1"
+    },
+    {
+      "name": "Jane Smith",
+      "totalSteps": 12000,
+      "avgHeartRate": 82,
+      "totalCalories": 450,
+      "section": "B2"
+    },
+    {
+      "name": "Mike Johnson",
+      "totalSteps": 18000,
+      "avgHeartRate": 70,
+      "totalCalories": 600,
+      "section": "A1"
+    },
+    {
+      "name": "Emily Davis",
+      "totalSteps": 16000,
+      "avgHeartRate": 78,
+      "totalCalories": 550,
+      "section": "C3"
+    },
+    {
+      "name": "Anna Brown",
+      "totalSteps": 14000,
+      "avgHeartRate": 80,
+      "totalCalories": 520,
+      "section": "B2"
+    },
+    {
+      "name": "Chris Evans",
+      "totalSteps": 17000,
+      "avgHeartRate": 77,
+      "totalCalories": 580,
+      "section": "A2"
+    },
+    {
+      "name": "Alice Taylor",
+      "totalSteps": 13000,
+      "avgHeartRate": 83,
+      "totalCalories": 480,
+      "section": "C1"
+    },
+    {
+      "name": "David Wilson",
+      "totalSteps": 16000,
+      "avgHeartRate": 79,
+      "totalCalories": 550,
+      "section": "A3"
+    },
+    {
+      "name": "Sophia Moore",
+      "totalSteps": 19000,
+      "avgHeartRate": 72,
+      "totalCalories": 620,
+      "section": "B3"
+    },
+    {
+      "name": "Peter Parker",
+      "totalSteps": 20000,
+      "avgHeartRate": 65,
+      "totalCalories": 700,
+      "section": "C2"
+    }
+  ]

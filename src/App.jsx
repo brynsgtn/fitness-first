@@ -5,6 +5,7 @@ import Landing from './pages/Landing'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Dashboard from './pages/Dashboard'
+import Fitness from './pages/Fitness'
 import Navbar from './components/Navbar'
 
 function App() {
@@ -12,11 +13,13 @@ function App() {
 
   return (
     <>
-      {/* <Landing/> */}
-      {/* <Login/> */}
-      {/* <Registration/> */}
+      {/* <Landing/>
+      <Login/>
+      <Registration/>
       <Navbar/>
-      <Dashboard/>
+      <Dashboard/> */}
+      <Navbar/>
+      <Fitness />
     </>
   )
 }
