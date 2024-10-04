@@ -1,5 +1,6 @@
 import React from 'react';
 
+
 export default function AddData({ onAddData }) {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -15,7 +16,7 @@ export default function AddData({ onAddData }) {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-2 lg:px-8">
+      <div className="flex min-h-full flex-1 flex-col px-6 pt-2 pb-10 lg:px-2 ">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className="mt-10 text-left text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Monitor your activity

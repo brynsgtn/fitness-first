@@ -2,15 +2,44 @@ import React, { useState } from 'react';
 
 export default function FitnessData({ data, onDelete, onUpdate }) {
   const [currentPage, setCurrentPage] = useState(1);
+  const [editingItem, setEditingItem] = useState(null); // Track the item being edited
+  const [formData, setFormData] = useState({
+    date: '',
+    totalSteps: '',
+    caloriesBurned: '',
+    heartRate: '',
+  });
   const itemsPerPage = 5;
   const totalPages = Math.ceil(data.length / itemsPerPage);
 
-  const handleUpdate = (item) => {
-    onUpdate(item);
+  const handleUpdateClick = (item) => {
+    setEditingItem(item);
+    setFormData({
+      date: item.date,
+      totalSteps: item.totalSteps,
+      caloriesBurned: item.caloriesBurned,
+      heartRate: item.heartRate,
+    });
   };
 
   const handleDelete = (id) => {
     onDelete(id);
+  };
+
+  const handleFormChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSave = () => {
+    onUpdate({ ...editingItem, ...formData });
+    setEditingItem(null); // Close the modal after saving
+  };
+
+  const handleCancel = () => {
+    setEditingItem(null); // Cancel editing and close modal
   };
 
   const currentData = data.slice(
@@ -47,7 +76,7 @@ export default function FitnessData({ data, onDelete, onUpdate }) {
                 <button
                   type="button"
                   className="bg-orange-600 text-white px-3 py-1 rounded-lg hover:bg-yellow-400 transition duration-300"
-                  onClick={() => handleUpdate(item)}
+                  onClick={() => handleUpdateClick(item)}
                 >
                   Update
                 </button>
@@ -92,6 +121,71 @@ export default function FitnessData({ data, onDelete, onUpdate }) {
           </button>
         </nav>
       </div>
+
+      {/* Modal for Editing */}
+      {editingItem && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg">
+            <h3 className="text-xl font-bold mb-4">Update Fitness Data</h3>
+            <div className="mb-4">
+              <label className="block text-gray-700">Date:</label>
+              <input
+                type="text"
+                name="date"
+                value={formData.date}
+                onChange={handleFormChange}
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Total Steps:</label>
+              <input
+                type="text"
+                name="totalSteps"
+                value={formData.totalSteps}
+                onChange={handleFormChange}
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Calories Burned:</label>
+              <input
+                type="text"
+                name="caloriesBurned"
+                value={formData.caloriesBurned}
+                onChange={handleFormChange}
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-gray-700">Heart Rate:</label>
+              <input
+                type="text"
+                name="heartRate"
+                value={formData.heartRate}
+                onChange={handleFormChange}
+                className="w-full px-4 py-2 border rounded-lg"
+              />
+            </div>
+            <div className="flex justify-end gap-4">
+              <button
+                type="button"
+                className="bg-green-600 text-white px-4 py-2 rounded-lg"
+                onClick={handleSave}
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                className="bg-gray-600 text-white px-4 py-2 rounded-lg"
+                onClick={handleCancel}
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

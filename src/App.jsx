@@ -7,6 +7,10 @@ import Registration from './pages/Registration'
 import Dashboard from './pages/Dashboard'
 import Fitness from './pages/Fitness'
 import Navbar from './components/Navbar'
+import Profile from './pages/Profile'
+import Report from './pages/Report'
+import InstructorReport from './pages/InstructorReport'
+import Manage from './pages/Manage'
 
 function App() {
 
@@ -19,7 +23,12 @@ function App() {
       <Navbar/>
       <Dashboard/> */}
       <Navbar/>
-      <Fitness />
+      {/* <Fitness /> */}
+      {/* <Profile/> */}
+      {/* <Report/> */}
+      {/* <InstructorReport/> */}
+      <Manage/>
+
     </>
   )
 }
