@@ -39,8 +39,11 @@ function AppContent() {
 }
 
 function App() {
-  const [user, setUser] = useState(null);
-
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem(('user' || []))));
+  const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem('users') || '[]'));
+  useEffect(() => {
+    console.log("Registered users: ", registeredUsers);
+  }, [registeredUsers]);
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
@@ -50,7 +53,7 @@ function App() {
   }
   return (
 
-    <UserProvider value = {{user, setUser, unsetUser}}>
+    <UserProvider value = {{user, setUser, unsetUser, registeredUsers, setRegisteredUsers}}>
       <BrowserRouter>
         <AppContent />
       </BrowserRouter>

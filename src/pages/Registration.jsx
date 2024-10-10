@@ -4,11 +4,12 @@ import UserContext from '../UserContext'
 import '../styles/registration.css'
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { v4 as uuidv4 } from 'uuid'; // Import the uuid function
 
 export default function Registration() {
 
     // to store values of the input fields
-    const {user, setUser} = useContext(UserContext);
+    const {user, setUser, registeredUsers, setRegisteredUsers} = useContext(UserContext);
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [role, setRole] = useState("");
@@ -22,6 +23,9 @@ export default function Registration() {
     const navigate = useNavigate();
 
 
+    useEffect(() => {
+        console.log("Registered users: ", registeredUsers);
+      }, [registeredUsers]);
 
     useEffect(() => {
         if (
@@ -45,12 +49,11 @@ export default function Registration() {
         return existingEmails.some(existingEmail => existingEmail === email);
       };
 
-      // Function to handle user registration
       const registerUser = async (e) => {
         e.preventDefault();
-      
+    
         const isEmailTaken = await checkEmailAvailability(email);
-      
+    
         if (isEmailTaken) {
           Swal.fire({
             title: "Duplicate Email Found",
@@ -60,9 +63,11 @@ export default function Registration() {
           });
           return;
         }
-      
+    
         try {
+          // Create a user object
           const user = {
+            id: uuidv4(), // Generate a unique ID for the user
             firstName,
             lastName,
             email,
@@ -70,20 +75,37 @@ export default function Registration() {
             section,
             password
           };
-      
+    
+          // If the role is 'student', add the health data array
+          if (role === "student") {
+            user.healthData = [
+              {
+                date: new Date().toISOString().split('T')[0], // Add today's date in YYYY-MM-DD format
+                totalCalories: null,
+                averageHeartRate: null,
+                totalSteps: null,
+                healthCondition: 'Unknown' // You can adjust this as needed
+              }
+            ];
+          }
+    
           // Store user data in localStorage
           const users = JSON.parse(localStorage.getItem('users') || '[]'); // Retrieve existing users
           users.push(user); // Add the new user to the array
           localStorage.setItem('users', JSON.stringify(users)); // Store updated array back in localStorage
-      
-          setUser(user); // Set user in context
+    
           
+
+          // Update registeredUsers state
+          const updatedRegisteredUsers = [...registeredUsers, user];
+          setRegisteredUsers(updatedRegisteredUsers); // Update the registered users in context
+    
           // Register email in localStorage
           const existingEmails = JSON.parse(localStorage.getItem('registeredEmails') || '[]');
           const updatedEmails = [...existingEmails, email];
           localStorage.setItem('registeredEmails', JSON.stringify(updatedEmails));
           setRegisteredEmails(updatedEmails);
-      
+    
           // Clear input fields
           setFirstName("");
           setLastName("");
@@ -92,14 +114,14 @@ export default function Registration() {
           setSection("");
           setPassword("");
           setConfirmPassword("");
-      
+    
           Swal.fire({
             title: "Registration Successful",
             icon: "success",
             text: "Welcome to TrackFit!",
             confirmButtonColor: '#f97316',
           });
-      
+    
           navigate("/login");
         } catch (error) {
           Swal.fire({
@@ -110,7 +132,7 @@ export default function Registration() {
           });
           console.error("Registration Error:", error);
         }
-      };
+    };
       
     return (
       <>
