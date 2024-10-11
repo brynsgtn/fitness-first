@@ -13,22 +13,22 @@ import InstructorReport from './pages/InstructorReport';
 import Manage from './pages/Manage';
 import { UserProvider } from './UserContext';
 
+// AppContent component handles the rendering of the app's content, including the Navbar and routes
 function AppContent() {
-  const location = useLocation();
-  const hideNavbarRoutes = ['/', '/login', '/registration'];
-  
- 
- return (
-    <> 
+  const location = useLocation(); // Get the current URL path
+  const hideNavbarRoutes = ['/', '/login', '/registration']; // Routes where the Navbar should not be displayed
+
+  return (
+    <>
       {/* Conditionally render the Navbar based on the current route */}
       {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
-      
+
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/fitness" element={<Fitness />} />
+        <Route path="/fitness/:id" element={<Fitness />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/report" element={<Report />} />
         <Route path="/instructorreport" element={<InstructorReport />} />
@@ -38,27 +38,33 @@ function AppContent() {
   );
 }
 
+// App component is the main component of the application
 function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem(('user' || []))));
-  const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem('users') || '[]'));
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem(('user' || [])))); // Initialize user state with data from localStorage
+  const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem('users') || '[]')); // Initialize registeredUsers state with data from localStorage
+
+  // Update registeredUsers state whenever it changes and log the updated values
   useEffect(() => {
     console.log("Registered users: ", registeredUsers);
-  }, [registeredUsers]);
+    console.log("Current user: ", user);
+  }, [registeredUsers, user]);
+
+  // Save user data to localStorage whenever the user state changes
   useEffect(() => {
     localStorage.setItem('user', JSON.stringify(user));
   }, [user]);
 
+  // Function to clear user data from localStorage
   const unsetUser = () => {
     localStorage.clear();
   }
-  return (
 
-    <UserProvider value = {{user, setUser, unsetUser, registeredUsers, setRegisteredUsers}}>
+  return (
+    <UserProvider value={{ user, setUser, unsetUser, registeredUsers, setRegisteredUsers }}>
       <BrowserRouter>
         <AppContent />
       </BrowserRouter>
     </UserProvider>
-    
   );
 }
 

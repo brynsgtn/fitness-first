@@ -1,4 +1,5 @@
 import { useState, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import List from '../components/List'; // Import the List component
 import '../styles/dashboard.css';
 import UserContext from '../UserContext';
@@ -6,9 +7,10 @@ import UserContext from '../UserContext';
 export default function Dashboard() {
   const { user, registeredUsers } = useContext(UserContext);
   const students = registeredUsers.filter((user) => user.role === "student");
-  const currentStudent = students.find((student) => student.id === user.id)
+  const currentStudent = user ? students.find((student) => student.id === user.id) : null;
   const [currentPage, setCurrentPage] = useState(1);
   const studentsPerPage = 5;
+  const navigate = useNavigate();
 
   // Logic to calculate displayed students
   const indexOfLastStudent = currentPage * studentsPerPage;
@@ -24,8 +26,14 @@ export default function Dashboard() {
     console.log("Current student: ", currentStudent);
   }, [user, registeredUsers]);
 
+  useEffect(() => {
+    if (!user) {
+      navigate("/");
+    }
+  }, [user]);
   return (
     <>
+
       <div className="min-h-full">
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">

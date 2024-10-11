@@ -17,7 +17,7 @@ export default function Registration() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [registeredEmails, setRegisteredEmails] = useState([]);
+    const [error, setError] = useState('');
     // to determine whether submit button is enabled or not
     const [isActive, setIsActive] = useState(false);
     const navigate = useNavigate();
@@ -45,8 +45,8 @@ export default function Registration() {
       }, [firstName, lastName, email, role, section, password, confirmPassword]);
     
       const checkEmailAvailability = async (email) => {
-        const existingEmails = JSON.parse(localStorage.getItem('registeredEmails') || '[]');
-        return existingEmails.some(existingEmail => existingEmail === email);
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        return existingUsers.some(existingUsers => existingUsers.email === email);
       };
 
       const registerUser = async (e) => {
@@ -80,11 +80,11 @@ export default function Registration() {
           if (role === "student") {
             user.healthData = [
               {
-                date: new Date().toISOString().split('T')[0], // Add today's date in YYYY-MM-DD format
+                date: null,
                 totalCalories: null,
                 averageHeartRate: null,
                 totalSteps: null,
-                healthCondition: 'Unknown' // You can adjust this as needed
+                healthCondition: null // You can adjust this as needed
               }
             ];
           }
@@ -100,11 +100,6 @@ export default function Registration() {
           const updatedRegisteredUsers = [...registeredUsers, user];
           setRegisteredUsers(updatedRegisteredUsers); // Update the registered users in context
     
-          // Register email in localStorage
-          const existingEmails = JSON.parse(localStorage.getItem('registeredEmails') || '[]');
-          const updatedEmails = [...existingEmails, email];
-          localStorage.setItem('registeredEmails', JSON.stringify(updatedEmails));
-          setRegisteredEmails(updatedEmails);
     
           // Clear input fields
           setFirstName("");
@@ -132,23 +127,22 @@ export default function Registration() {
           });
           console.error("Registration Error:", error);
         }
-    };
+      };
       
     return (
       <>
-
         <div className=' h-screen'>
             <div className="pt-10 pb-5">
-            <img
-                alt="Your Company"
-                src="src/assets/logo.png"
-                className=" h-10 w-auto mx-auto md:mx-0 md:ps-10"
-                />
+              <img
+                  alt="Your Company"
+                  src="src/assets/logo.png"
+                  className=" h-10 w-auto mx-auto md:mx-0 md:ps-10"
+                  />
             </div>
             <div className="flex flex-row justify-center items-center">
-            <div className='hidden xl:block'>
-                <img src='src/assets/girl.png' className='running-girl'></img>
-            </div>
+              <div className='hidden xl:block'>
+                  <img src='src/assets/girl.png' className='running-girl'></img>
+              </div>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 pt-3 pb-12 md:pt-8 lg:px-8">
             
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -223,10 +217,10 @@ export default function Registration() {
                                 required 
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                             >
-                                <option value="">Select a section</option>
-                                <option value="section1">Section 1</option>
-                                <option value="section2">Section 2</option>
-                                <option value="section3">Section 3</option>
+                                <option value="">Select a program</option>
+                                <option value="UOX">UOX</option>
+                                <option value="Blended">Blended</option>
+                                <option value="Face to Face">Face to Face</option>
                             </select>
                         </div>
                     </div>
@@ -244,7 +238,18 @@ export default function Registration() {
                         required
                         autoComplete="email"
                         className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
-                        onChange={(e) => setEmail(e.target.value)} // Add this onChange handler
+                        onChange={(e) => {
+                          const enteredEmail = e.target.value;
+
+                          // Check if the entered email includes "@Google Flights"
+                          if (enteredEmail.includes("@")) {
+                            setEmail(enteredEmail); // Update state only if valid domain
+                            setError('');
+                          } else {
+                            // Display an error message
+                            console.error("Email address must end with @Google Flights");
+                          }
+                        }}
                     />
                     </div>
                 </div>

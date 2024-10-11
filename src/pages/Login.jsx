@@ -55,7 +55,7 @@ export default function Login() {
   return (
     <>
       <div className='h-screen'>
-        <div className="pt-10 pb-5">
+        <div className="pt-10 pb-20">
           <img
             alt="Your Company"
             src="src/assets/logo.png"
@@ -63,6 +63,9 @@ export default function Login() {
           />
         </div>
         <div className="flex flex-row justify-center items-center">
+            <div className='hidden xl:block'>
+                <img src='src/assets/girl.png' className='running-girl'></img>
+            </div>
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 pt-3 pb-12 md:pt-8 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
               <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 mt-10 xl:mt-0">
@@ -70,7 +73,7 @@ export default function Login() {
               </h2>
             </div>
             <div className="mt-5 sm:mx-auto sm:w-full sm:max-w-sm">
-              <form action="#" method="POST" className="space-y-2">
+              <form className="space-y-2">
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
                     Email address
