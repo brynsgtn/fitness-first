@@ -5,7 +5,7 @@ import UserContext from '../UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Login() {
-  const { user, setUser, registeredUsers, setRegisteredUsers } = useContext(UserContext);
+  const { setUser} = useContext(UserContext);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isActive, setIsActive] = useState(false);
@@ -22,7 +22,7 @@ export default function Login() {
 
   // Function to retrieve registered users from localStorage
   const getRegisteredUsers = () => {
-    return JSON.parse(localStorage.getItem('users')) || [];
+    return JSON.parse(localStorage.getItem('registeredUsers')) || [];
   };
 
   // Function to handle user login
@@ -34,11 +34,11 @@ export default function Login() {
     if (currentUser) {
       // Set the user in context and redirect
       setUser(currentUser);
-      localStorage.setItem('user', JSON.stringify(currentUser)); // Store updated 
+      localStorage.setItem('currentUser', JSON.stringify(currentUser)); // Store updated 
       Swal.fire({
         title: "Login Successful",
         icon: "success",
-        text: "Welcome back!",
+        text: `Welcome back ${currentUser.firstName}!`,
         confirmButtonColor: '#f97316',
       });
       navigate("/dashboard"); // Redirect to dashboard or another page

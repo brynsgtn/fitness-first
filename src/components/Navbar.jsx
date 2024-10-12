@@ -1,25 +1,16 @@
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import logo from '../assets/logo.png'
-import userLogo from '../assets/user.png'
+import logo from '../assets/logo.png';
+import userLogo from '../assets/user.png';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2'; // Ensure you have this import
 
-const navigation = [
-  { name: 'Dashboard', href: '/dashboard', current: false },
-  { name: 'Health Monitoring', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false },
-];
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
-
-
-
 export default function NavBar() {
+  function classNames(...classes) {
+    return classes.filter(Boolean).join(' ');
+  }
 
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate(); // Use the useNavigate hook
@@ -40,24 +31,27 @@ export default function NavBar() {
         localStorage.removeItem('user');
         // Set user in context to null
         setUser(null);
-  
+
         Swal.fire({
           title: "Logout Successful",
           icon: "success",
           text: "You have been logged out.",
           confirmButtonColor: '#f97316',
         });
-  
-          navigate("/"); // Redirect to the login page after a delay
 
+        navigate("/"); // Redirect to the login page after a delay
       }
     });
   };
-  
+
+  // Conditional navigation items
+  const navigation = [
+    { name: 'Dashboard', href: '/dashboard', current: false },
+    ...(user.role !== 'instructor' ? [{ name: 'Health Monitoring', href: `/fitness/${user.id}`, current: false }] : []), // Only show for non-instructors
+    { name: 'Reports', href: '#', current: false },
+  ];
 
   return (
-
-    
     <Disclosure as="nav" className="bg-white text-black">
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
         <div className="relative flex h-16 items-center justify-between">

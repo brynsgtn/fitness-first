@@ -6,7 +6,10 @@ import UserContext from '../UserContext';
 
 export default function Dashboard() {
   const { user, registeredUsers } = useContext(UserContext);
-  const students = registeredUsers.filter((user) => user.role === "student");
+  const students = Array.isArray(registeredUsers) 
+  ? registeredUsers.filter((user) => user.role === "student") 
+  : [];
+
   const currentStudent = user ? students.find((student) => student.id === user.id) : null;
   const [currentPage, setCurrentPage] = useState(1);
   const studentsPerPage = 5;
@@ -38,7 +41,7 @@ export default function Dashboard() {
         <header className="bg-white shadow">
           <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
             <h1 className="header text-lg sm:text-xl md:text-2xl">
-              {user.role === "instructor" ? "Instructor" : "Student"} {user.firstName} Dashboard
+              {user.role === "instructor" ? "Instructor" : "Student"} Dashboard
             </h1>
           </div>
         </header>

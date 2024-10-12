@@ -40,8 +40,8 @@ function AppContent() {
 
 // App component is the main component of the application
 function App() {
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem(('user' || [])))); // Initialize user state with data from localStorage
-  const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem('users') || '[]')); // Initialize registeredUsers state with data from localStorage
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem(('currentUser' || [])))); // Initialize user state with data from localStorage
+  const [registeredUsers, setRegisteredUsers] = useState(JSON.parse(localStorage.getItem('registeredUsers') || '[]')); // Initialize registeredUsers state with data from localStorage
 
   // Update registeredUsers state whenever it changes and log the updated values
   useEffect(() => {
@@ -51,7 +51,7 @@ function App() {
 
   // Save user data to localStorage whenever the user state changes
   useEffect(() => {
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('currentUser', JSON.stringify(user));
   }, [user]);
 
   // Function to clear user data from localStorage
