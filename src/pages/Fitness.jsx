@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'; // Import uuid for unique IDs
 import Swal from 'sweetalert2';
 import { useParams } from 'react-router-dom';
 
+
 export default function Fitness() {
   const { user, registeredUsers, setRegisteredUsers } = useContext(UserContext);
   const { id } = useParams(); // Use 'id' from the URL parameters

@@ -1,9 +1,12 @@
 import React, { useState, useContext } from 'react';
 import UserContext from '../UserContext';
 import dayjs from 'dayjs';
+import { useNavigate } from 'react-router-dom';
+import '../styles/dashboard.css'
 
 export default function FitnessData({ currentStudent, onDelete, onUpdate, currentData, name }) {
   const { user } = useContext(UserContext);
+  const navigate = useNavigate(); 
 
   // Extract the healthData from the current student
   const { healthData } = currentStudent || { healthData: [] }; // Default to empty array
@@ -68,11 +71,15 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
     setEditingItem(null); // Cancel editing and close modal
   };
 
+  const goToReports = () => {
+    navigate("/instructorreport")
+  }
+
   return (
     <>
       {user.role === "instructor" ? (
         <div className="overflow-x-auto mt-2">
-          <h2 className="text-2xl font-bold leading-9 tracking-tight text-gray-900 mb-4">
+          <h2 className="header">
             {`${name}'s Fitness Data`}
           </h2>
 
@@ -80,9 +87,9 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
             <thead className="bg-orange-600 text-white">
               <tr>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Date</th>
-                <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Total Steps</th>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Calories Burned</th>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Heart Rate</th>
+                <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Total Steps</th>
               </tr>
             </thead>
             <tbody>
@@ -93,11 +100,12 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
                     className={`group ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-yellow-400 transition duration-300`}
                   >
                     <td className="px-4 py-3 whitespace-nowrap">
-                      {dayjs(item.date).format('MMM DD YYYY')} {/* Format the date here */}
+                      {dayjs(item.date).format('MMM DD, YYYY')} {/* Format the date here */}
                     </td>
-                    <td className="px-4 py-3 whitespace-nowrap">{item.totalSteps}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{item.totalCalories}</td>
-                    <td className="px-4 py-3 whitespace-nowrap">{item.averageHeartRate}</td>
+                    
+                    <td className="px-4 py-3 whitespace-nowrap">{item.totalCalories.toLocaleString('en-US')} kcal</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{item.averageHeartRate.toLocaleString('en-US')} bpm</td>
+                    <td className="px-4 py-3 whitespace-nowrap">{item.totalSteps.toLocaleString('en-US')} </td>
                   </tr>
                 ))
               ) : (
@@ -130,6 +138,9 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
               </button>
             </div>
           )}
+          <div className="flex justify-end">
+            <button className="bg-orange-600 text-white px-3 py-1 rounded-lg hover:bg-yellow-400 transition duration-300 mt-10" onClick={goToReports}>View Reports</button>
+          </div>
         </div>
       ) : (
         <div className="overflow-x-auto mt-10">
@@ -140,9 +151,9 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
             <thead className="bg-orange-600 text-white">
               <tr>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Date</th>
-                <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Total Steps</th>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Calories Burned</th>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Heart Rate</th>
+                <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Total Steps</th>
                 <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
@@ -154,11 +165,11 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
         className={`group ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-yellow-400 transition duration-300`}
       >
         <td className="px-4 py-3 whitespace-nowrap">
-                      {dayjs(item.date).format('MMM DD YYYY')} {/* Format the date here */}
+                      {dayjs(item.date).format('MMM DD, YYYY')} {/* Format the date here */}
                     </td>
-        <td className="px-4 py-3 whitespace-nowrap">{item.totalSteps}</td>
-        <td className="px-4 py-3 whitespace-nowrap">{item.totalCalories}</td>
-        <td className="px-4 py-3 whitespace-nowrap">{item.averageHeartRate}</td>
+        <td className="px-4 py-3 whitespace-nowrap">{item.totalCalories.toLocaleString('en-US')} kcal</td>
+        <td className="px-4 py-3 whitespace-nowrap">{item.averageHeartRate.toLocaleString('en-US')} bpm</td>
+        <td className="px-4 py-3 whitespace-nowrap">{item.totalSteps.toLocaleString('en-US')}</td>
         <td className="py-3 whitespace-nowrap flex justify-center gap-2">
           <button
             type="button"

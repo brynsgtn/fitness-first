@@ -8,33 +8,37 @@ import Dashboard from './pages/Dashboard';
 import Fitness from './pages/Fitness';
 import Navbar from './components/Navbar';
 import Profile from './pages/Profile';
-import Report from './pages/Report';
 import InstructorReport from './pages/InstructorReport';
 import Manage from './pages/Manage';
+import Footer from './components/Footer';
 import { UserProvider } from './UserContext';
 
 // AppContent component handles the rendering of the app's content, including the Navbar and routes
 function AppContent() {
   const location = useLocation(); // Get the current URL path
-  const hideNavbarRoutes = ['/', '/login', '/registration']; // Routes where the Navbar should not be displayed
+  const hideNavbarRoutes = ['/', '/login', '/registration'] // Routes where the Navbar should not be displayed
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen"> {/* This makes the main container fill the viewport height */}
       {/* Conditionally render the Navbar based on the current route */}
       {!hideNavbarRoutes.includes(location.pathname) && <Navbar />}
 
-      <Routes>
-        <Route path="/" element={<Landing />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/fitness/:id" element={<Fitness />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/report" element={<Report />} />
-        <Route path="/instructorreport" element={<InstructorReport />} />
-        <Route path="/manage" element={<Manage />} />
-      </Routes>
-    </>
+      <main className="flex-grow"> {/* This allows the main content to grow and take up space */}
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registration" element={<Registration />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/fitness/:id" element={<Fitness />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/instructorreport" element={<InstructorReport />} />
+          <Route path="/manage" element={<Manage />} />
+        </Routes>
+      </main>
+
+      {!hideNavbarRoutes.includes(location.pathname) && <Footer />}
+      
+    </div>
   );
 }
 

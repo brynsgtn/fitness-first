@@ -30,7 +30,7 @@ export default function List({ currentStudents, currentPage, setCurrentPage, tot
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="overflow-x-auto">
           {isInstructor ? (
-            <table className="min-w-full table-auto text-center bg-white shadow-lg rounded-lg">
+            <table className="min-w-full table-auto text-center bg-white shadow-lg rounded-lg border-2 border-gray-200">
               <thead className="bg-orange-600 text-white">
                 <tr>
                   <th className="px-4 py-3 text-sm font-medium uppercase tracking-wider">Student Name</th>
@@ -47,9 +47,9 @@ export default function List({ currentStudents, currentPage, setCurrentPage, tot
                   return (
                     <tr key={student.id || index} className={`group ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-yellow-400 transition duration-300`}>
                       <td className="px-4 py-3 whitespace-nowrap">{`${student.firstName} ${student.lastName}`}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">{totalCalories > 0 ?  totalCalories  : "No Activity Yet"}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">{averageHeartRate > 0 ? averageHeartRate : "No Activity Yet"}</td>
-                      <td className="px-4 py-3 whitespace-nowrap">{totalSteps || "No Activity Yet"}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{totalCalories > 0 ?  `${totalCalories.toLocaleString('en-US')} kcal`  : "No Activity Yet"}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{averageHeartRate > 0 ? `${averageHeartRate.toLocaleString('en-US')}  bpm` : "No Activity Yet"}</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{totalSteps > 0 ? totalSteps.toLocaleString('en-US') : "No Activity Yet"}</td>
                       <td className="px-4 py-3 whitespace-nowrap">{student.section}</td>
                       <td className="py-3 whitespace-nowrap">
                         <button
@@ -80,7 +80,7 @@ export default function List({ currentStudents, currentPage, setCurrentPage, tot
                 {currentStudent.healthData && currentStudent.healthData.length > 0 ? (
                   <tr>
                   <td className="px-4 py-3">
-                    {currentStudent.healthData.length <= 1 ? "No Activity Yet" : currentStudent.healthData.reduce((acc, data) => acc + (parseFloat(data.totalCalories) || 0), 0).toLocaleString('en-US')}
+                    {currentStudent.healthData.length <= 1 ? "No Activity Yet" : `${currentStudent.healthData.reduce((acc, data) => acc + (parseFloat(data.totalCalories) || 0), 0).toLocaleString('en-US')} kcal`}
                   </td>
                     <td className="px-4 py-3">
                         {currentStudent.healthData.length <= 1 ?  "No Activity Yet": (
@@ -91,7 +91,7 @@ export default function List({ currentStudents, currentPage, setCurrentPage, tot
                         )}
                     </td>
                     <td className="px-4 py-3">
-                        {currentStudent.healthData.length <= 0 ?
+                        {currentStudent.healthData.length <= 1 ?
                             "No Activity Yet" :
                             currentStudent.healthData.reduce((acc, data) => acc + (parseFloat(data.totalSteps) || 0), 0).toLocaleString('en-US')
                         }
