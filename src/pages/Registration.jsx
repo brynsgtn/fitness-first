@@ -129,11 +129,11 @@ export default function Registration() {
     <>
       <div className="h-screen">
         <div className="pt-10 pb-5">
-          <img alt="Your Company" src="src/assets/logo.png" className="h-10 w-auto mx-auto md:mx-0 md:ps-10" />
+          <img alt="Your Company" src="./logo.png" className="h-10 w-auto mx-auto md:mx-0 md:ps-10" />
         </div>
         <div className="flex flex-row justify-center items-center">
           <div className="hidden xl:block">
-            <img src="src/assets/girl.png" className="running-girl" />
+            <img src="./girl.png" className="running-girl" />
           </div>
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 pt-3 pb-12 md:pt-8 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">

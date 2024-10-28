@@ -20,7 +20,7 @@ export default function Landing() {
     <div className="bg-white h-screen">     
         <div className="mx-auto max-w-6xl px-10 pt-20 lg:pt-40 flex flex-row">
           <div>
-            <img src='./src/assets/logo.png' className='mb-5'></img>
+            <img src='./logo.png' className='mb-5'></img>
             <h1 className="text-4xl font-bold tracking-tight text-yellow-400 sm:text-6xl">
                 <span className='font-light tracking-widest'>FITNESS</span> <span className='italic'>FIRST.</span>
             </h1>
@@ -43,7 +43,7 @@ export default function Landing() {
             </div>
           </div>
           <div className='hidden sm:block'>
-            <img src='src/assets/girl.png' className='running-girl'></img>
+            <img src='./girl.png' className='running-girl'></img>
          </div>
         </div>
     </div>

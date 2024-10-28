@@ -58,13 +58,13 @@ export default function Login() {
         <div className="pt-10 pb-20">
           <img
             alt="Your Company"
-            src="src/assets/logo.png"
+            src="./logo.png"
             className="h-10 w-auto mx-auto md:mx-0 md:ps-10"
           />
         </div>
         <div className="flex flex-row justify-center items-center">
             <div className='hidden xl:block'>
-                <img src='src/assets/girl.png' className='running-girl'></img>
+                <img src='./girl.png' className='running-girl'></img>
             </div>
           <div className="flex min-h-full flex-1 flex-col justify-center px-6 pt-3 pb-12 md:pt-8 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">

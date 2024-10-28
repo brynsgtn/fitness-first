@@ -2,8 +2,6 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import logo from '../assets/logo.png';
-import userLogo from '../assets/user.png';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2'; // Ensure you have this import
 
@@ -69,7 +67,7 @@ export default function NavBar() {
             <div className="flex flex-shrink-0 items-center">
               <img
                 alt="Fitness First"
-                src={logo}
+                src="./logo.png"
                 className="h-8 w-auto"
               />
             </div>
@@ -98,7 +96,7 @@ export default function NavBar() {
                 <MenuButton className="relative flex max-w-xs items-center rounded-full bg-orange-600 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-orange-600">
                   <span className="absolute -inset-1.5" />
                   <span className="sr-only">Open user menu</span>
-                  <img alt="" src={userLogo} className="h-8 w-8 rounded-full" />
+                  <img alt="" src="./user.png" className="h-8 w-8 rounded-full" />
                 </MenuButton>
               </div>
               <MenuItems
