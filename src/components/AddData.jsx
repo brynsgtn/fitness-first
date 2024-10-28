@@ -17,7 +17,7 @@ export default function AddData({ onAddData }) {
   // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddData(formData);
+    onAddData(formData );
     setFormData({
       date: '',
       totalSteps: '',
