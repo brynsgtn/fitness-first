@@ -1,6 +1,6 @@
 # TrackFit Health Monitor
 
-![TrackFit Preview](/public/Screenshot1.png)
+![TrackFit Preview](/Landing.png)
 
 ## Overview
 
@@ -30,7 +30,7 @@ The TrackFit Health Monitor application demonstrates the use of modern web devel
 
 ## Deployment
 
-TrackFit Health Monitor is deployed using Netlify for easy hosting and continuous integration. You can access the live site [here](https://your-netlify-site-url.com).
+TrackFit Health Monitor is deployed using Netlify for easy hosting and continuous integration. You can access the live site [here](https://track-fit-mapua.netlify.app/).
 
 ## Installation and Usage
 
@@ -59,12 +59,4 @@ To set up and run the TrackFit Health Monitor application locally, follow these 
 - [Tailwind CSS Documentation](https://tailwindcss.com/docs)
 - [Netlify Documentation](https://docs.netlify.com/)
 
-## Screenshots
 
-![Landing Page](/public/Screenshot1.png)
-![Student Dashboard](/public/Screenshot2.png)
-![Activity Logging Page](/public/Screenshot3.png)
-![Instructor Dashboard](/public/Screenshot4.png)
-![Registration Page](/public/Screenshot5.png)
-![Login Page](/public/Screenshot6.png)
-![Profile Edit Page](/public/Screenshot7.png)
