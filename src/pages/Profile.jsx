@@ -146,6 +146,7 @@ function UpdateProfileModal({ isOpen, onClose, onUpdate, currentProfile }) {
             />
           </div>
         </div>
+        
         <div className="mt-6 flex justify-end space-x-2">
           <button className="px-4 py-2 bg-orange-600 text-white rounded-md hover:bg-yellow-400" onClick={handleSave}>
             Save
