@@ -34,7 +34,6 @@ export default function AddData({ onAddData }) {
         </h2>
         <p className="mt-2 leading-9 tracking-tight text-gray-900">Add your fitness data</p>
       </div>
-
       <div className="mt-2 sm:mx-auto sm:w-full sm:max-w-sm">
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
@@ -48,8 +47,7 @@ export default function AddData({ onAddData }) {
                 required
               />
             </div>
-          </div>
-          
+          </div>        
           <div>
             <div className="mt-2">
               <input
@@ -63,8 +61,7 @@ export default function AddData({ onAddData }) {
                 min="0"  // Prevents negative numbers
               />
             </div>
-          </div>
-          
+          </div> 
           <div>
             <div className="mt-2">
               <input
@@ -79,7 +76,6 @@ export default function AddData({ onAddData }) {
               />
             </div>
           </div>
-
           <div>
             <div className="mt-2">
               <input

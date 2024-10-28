@@ -82,7 +82,6 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
           <h2 className="header">
             {`${name}'s Fitness Data`}
           </h2>
-
           <table className="min-w-full table-auto text-center bg-white shadow-lg rounded-lg mt-5">
             <thead className="bg-orange-600 text-white">
               <tr>
@@ -158,43 +157,42 @@ export default function FitnessData({ currentStudent, onDelete, onUpdate, curren
               </tr>
             </thead>
             <tbody>
-  {healthData.length > 1 ? (
-    healthData.slice(1).map((item, index) => ( // Skip the first index
-      <tr
-        key={item.id}
-        className={`group ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-yellow-400 transition duration-300`}
-      >
-        <td className="px-4 py-3 whitespace-nowrap">
-                      {dayjs(item.date).format('MMM DD, YYYY')} {/* Format the date here */}
-                    </td>
-        <td className="px-4 py-3 whitespace-nowrap">{item.totalCalories.toLocaleString('en-US')} kcal</td>
-        <td className="px-4 py-3 whitespace-nowrap">{item.averageHeartRate.toLocaleString('en-US')} bpm</td>
-        <td className="px-4 py-3 whitespace-nowrap">{item.totalSteps.toLocaleString('en-US')}</td>
-        <td className="py-3 whitespace-nowrap flex justify-center gap-2">
-          <button
-            type="button"
-            className="bg-orange-600 text-white px-3 py-1 rounded-lg hover:bg-yellow-400 transition duration-300"
-            onClick={() => handleUpdateClick(item)}
-          >
-            Update
-          </button>
-          <button
-            type="button"
-            className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-400 transition duration-300"
-            onClick={() => handleDelete(item.id)}
-          >
-            Delete
-          </button>
-        </td>
-      </tr>
-    ))
-  ) : (
-    <tr>
-      <td colSpan="5" className="text-center py-3">No data available</td>
-    </tr>
-  )}
-</tbody>
-
+                {healthData.length > 1 ? (
+                  healthData.slice(1).map((item, index) => ( // Skip the first index
+                    <tr
+                      key={item.id}
+                      className={`group ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-yellow-400 transition duration-300`}
+                    >
+                      <td className="px-4 py-3 whitespace-nowrap">
+                                    {dayjs(item.date).format('MMM DD, YYYY')} {/* Format the date here */}
+                                  </td>
+                      <td className="px-4 py-3 whitespace-nowrap">{item.totalCalories.toLocaleString('en-US')} kcal</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{item.averageHeartRate.toLocaleString('en-US')} bpm</td>
+                      <td className="px-4 py-3 whitespace-nowrap">{item.totalSteps.toLocaleString('en-US')}</td>
+                      <td className="py-3 whitespace-nowrap flex justify-center gap-2">
+                        <button
+                          type="button"
+                          className="bg-orange-600 text-white px-3 py-1 rounded-lg hover:bg-yellow-400 transition duration-300"
+                          onClick={() => handleUpdateClick(item)}
+                        >
+                          Update
+                        </button>
+                        <button
+                          type="button"
+                          className="bg-red-600 text-white px-3 py-1 rounded-lg hover:bg-red-400 transition duration-300"
+                          onClick={() => handleDelete(item.id)}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan="5" className="text-center py-3">No data available</td>
+                  </tr>
+                )}
+            </tbody>
           </table>
 
           {/* Pagination */}
