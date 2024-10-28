@@ -1,6 +1,6 @@
 # TrackFit Health Monitor
 
-(Landing.png)
+![TrackFit Preview](Landing.png)
 
 ## Overview
 
